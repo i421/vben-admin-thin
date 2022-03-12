@@ -7,6 +7,9 @@ dist
 tests/server/static
 tests/server/static/upload
 
+#shell script
+install.sh
+
 .local
 # local env files
 .env.local
