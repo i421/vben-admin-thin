@@ -4,6 +4,7 @@
   </BasicModal>
 </template>
 <script lang="ts">
+  import { useDeptStore } from '/@/store/modules/dept';
   import { defineComponent, ref, computed, unref } from 'vue';
   import { BasicModal, useModalInner } from '/@/components/Modal';
   import { BasicForm, useForm } from '/@/components/Form/index';
@@ -40,6 +41,8 @@
         });
       });
 
+      const deptStore = useDeptStore();
+
       const getTitle = computed(() => (!unref(isUpdate) ? '新增部门' : '编辑部门'));
 
       async function handleSubmit() {
@@ -47,7 +50,8 @@
           const values = await validate();
           setModalProps({ confirmLoading: true });
           // TODO custom api
-          console.log(values);
+          const res = await deptStore.updateDept(values);
+          console.log(res);
           closeModal();
           emit('success');
         } finally {

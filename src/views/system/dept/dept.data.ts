@@ -61,6 +61,13 @@ export const searchFormSchema: FormSchema[] = [
 
 export const formSchema: FormSchema[] = [
   {
+    field: 'id',
+    label: '序号',
+    component: 'Input',
+    show: false,
+    required: true,
+  },
+  {
     field: 'deptName',
     label: '部门名称',
     component: 'Input',
@@ -94,8 +101,8 @@ export const formSchema: FormSchema[] = [
     defaultValue: '0',
     componentProps: {
       options: [
-        { label: '启用', value: '0' },
-        { label: '停用', value: '1' },
+        { label: '启用', value: 0 },
+        { label: '停用', value: 1 },
       ],
     },
     required: true,

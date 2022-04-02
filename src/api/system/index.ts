@@ -16,6 +16,8 @@ enum Api {
   AccountList = '/system/getAccountList',
   IsAccountExist = '/system/accountExist',
   DeptList = '/system/getDeptList',
+  updateDept = '/system/updateDept',
+  deleteDept = '/system/deleteDept',
   setRoleStatus = '/system/setRoleStatus',
   MenuList = '/system/getMenuList',
   RolePageList = '/system/getRoleListByPage',
@@ -27,6 +29,10 @@ export const getAccountList = (params: AccountParams) =>
 
 export const getDeptList = (params?: DeptListItem) =>
   defHttp.get<DeptListGetResultModel>({ url: Api.DeptList, params });
+
+export const updateDept = (data) => defHttp.post({ url: Api.updateDept, params: data });
+
+export const deleteDept = (id) => defHttp.delete({ url: Api.deleteDept, params: { id: id } });
 
 export const getMenuList = (params?: MenuParams) =>
   defHttp.get<MenuListGetResultModel>({ url: Api.MenuList, params });

@@ -27,6 +27,7 @@
   </div>
 </template>
 <script lang="ts">
+  import { useDeptStore } from '/@/store/modules/dept';
   import { defineComponent } from 'vue';
 
   import { BasicTable, useTable, TableAction } from '/@/components/Table';
@@ -66,6 +67,8 @@
         },
       });
 
+      const deptStore = useDeptStore();
+
       function handleCreate() {
         openModal(true, {
           isUpdate: false,
@@ -80,7 +83,8 @@
       }
 
       function handleDelete(record: Recordable) {
-        console.log(record);
+        const res = deptStore.deleteDept(record.id);
+        console.log(res);
       }
 
       function handleSuccess() {

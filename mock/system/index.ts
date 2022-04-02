@@ -35,6 +35,7 @@ const roleList = (() => {
   return result;
 })();
 
+/*
 const deptList = (() => {
   const result: any[] = [];
   for (let index = 0; index < 3; index++) {
@@ -65,6 +66,7 @@ const deptList = (() => {
   }
   return result;
 })();
+*/
 
 const menuList = (() => {
   const result: any[] = [];
@@ -170,6 +172,7 @@ export default [
       return resultSuccess(roleList);
     },
   },
+  /*
   {
     url: '/basic-api/system/getDeptList',
     timeout: 100,
@@ -178,6 +181,7 @@ export default [
       return resultSuccess(deptList);
     },
   },
+ */
   {
     url: '/basic-api/system/getMenuList',
     timeout: 100,
