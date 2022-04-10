@@ -8,6 +8,7 @@ import { ROLES_KEY, TOKEN_KEY, USER_INFO_KEY } from '/@/enums/cacheEnum';
 import { getAuthCache, setAuthCache } from '/@/utils/auth';
 import { GetUserInfoModel, LoginParams } from '/@/api/sys/model/userModel';
 import { doLogout, getUserInfo, loginApi } from '/@/api/sys/user';
+import { deleteAccount } from '/@/api/system/index';
 import { useI18n } from '/@/hooks/web/useI18n';
 import { useMessage } from '/@/hooks/web/useMessage';
 import { router } from '/@/router';
@@ -167,6 +168,17 @@ export const useUserStore = defineStore({
           await this.logout(true);
         },
       });
+    },
+
+    /*
+     * 删除用户
+     */
+    async deleteUser(id) {
+      try {
+        await deleteAccount(id);
+      } catch {
+        console.log('删除用户失败');
+      }
     },
   },
 });

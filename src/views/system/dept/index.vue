@@ -27,7 +27,6 @@
   </div>
 </template>
 <script lang="ts">
-  import { useDeptStore } from '/@/store/modules/dept';
   import { defineComponent } from 'vue';
 
   import { BasicTable, useTable, TableAction } from '/@/components/Table';
@@ -37,6 +36,8 @@
   import DeptModal from './DeptModal.vue';
 
   import { columns, searchFormSchema } from './dept.data';
+
+  import { useDeptStore } from '/@/store/modules/dept';
 
   export default defineComponent({
     name: 'DeptManagement',

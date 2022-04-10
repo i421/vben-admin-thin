@@ -25,12 +25,17 @@ export const columns: BasicColumn[] = [
   },
   {
     title: '角色',
-    dataIndex: 'role',
+    dataIndex: 'roles[0].roleName',
     width: 200,
   },
   {
     title: '备注',
     dataIndex: 'remark',
+  },
+  {
+    title: '部门',
+    dataIndex: 'deptId',
+    isShow: false,
   },
 ];
 
@@ -50,6 +55,13 @@ export const searchFormSchema: FormSchema[] = [
 ];
 
 export const accountFormSchema: FormSchema[] = [
+  {
+    field: 'userId',
+    label: '序号',
+    component: 'Input',
+    show: false,
+    required: true,
+  },
   {
     field: 'account',
     label: '用户名',
@@ -87,7 +99,7 @@ export const accountFormSchema: FormSchema[] = [
     componentProps: {
       api: getAllRoleList,
       labelField: 'roleName',
-      valueField: 'roleValue',
+      valueField: 'id',
     },
     required: true,
   },

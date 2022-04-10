@@ -35,6 +35,7 @@
   </PageWrapper>
 </template>
 <script lang="ts">
+  import { useUserStore } from '/@/store/modules/user';
   import { defineComponent, reactive } from 'vue';
 
   import { BasicTable, useTable, TableAction } from '/@/components/Table';
@@ -58,7 +59,7 @@
       const [registerTable, { reload, updateTableDataRecord }] = useTable({
         title: '账号列表',
         api: getAccountList,
-        rowKey: 'id',
+        rowKey: 'userId',
         columns,
         formConfig: {
           labelWidth: 120,
@@ -94,7 +95,10 @@
         });
       }
 
+      const userStore = useUserStore();
+
       function handleDelete(record: Recordable) {
+        userStore.deleteUser(record.userId);
         console.log(record);
       }
 

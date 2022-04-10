@@ -37,6 +37,8 @@
 
   import { columns, searchFormSchema } from './role.data';
 
+  import { useRoleStore } from '/@/store/modules/role';
+
   export default defineComponent({
     name: 'RoleManagement',
     components: { BasicTable, RoleDrawer, TableAction },
@@ -63,6 +65,8 @@
         },
       });
 
+      const roleStore = useRoleStore();
+
       function handleCreate() {
         openDrawer(true, {
           isUpdate: false,
@@ -77,6 +81,7 @@
       }
 
       function handleDelete(record: Recordable) {
+        roleStore.deleteRole(record.id);
         console.log(record);
       }
 

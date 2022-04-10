@@ -1,6 +1,7 @@
 import { MockMethod } from 'vite-plugin-mock';
-import { resultError, resultPageSuccess, resultSuccess } from '../_util';
+// import { resultError, resultPageSuccess, resultSuccess } from '../_util';
 
+/*
 const accountList = (() => {
   const result: any[] = [];
   for (let index = 0; index < 20; index++) {
@@ -17,7 +18,9 @@ const accountList = (() => {
   }
   return result;
 })();
+*/
 
+/*
 const roleList = (() => {
   const result: any[] = [];
   for (let index = 0; index < 4; index++) {
@@ -34,6 +37,7 @@ const roleList = (() => {
   }
   return result;
 })();
+*/
 
 /*
 const deptList = (() => {
@@ -68,6 +72,7 @@ const deptList = (() => {
 })();
 */
 
+/*
 const menuList = (() => {
   const result: any[] = [];
   for (let index = 0; index < 3; index++) {
@@ -135,8 +140,10 @@ const menuList = (() => {
   }
   return result;
 })();
+*/
 
 export default [
+  /*
   {
     url: '/basic-api/system/getAccountList',
     timeout: 100,
@@ -146,6 +153,8 @@ export default [
       return resultPageSuccess(page, pageSize, accountList);
     },
   },
+ */
+  /*
   {
     url: '/basic-api/system/getRoleListByPage',
     timeout: 100,
@@ -164,6 +173,8 @@ export default [
       return resultSuccess({ id, status });
     },
   },
+ */
+  /*
   {
     url: '/basic-api/system/getAllRoleList',
     timeout: 100,
@@ -172,6 +183,7 @@ export default [
       return resultSuccess(roleList);
     },
   },
+ */
   /*
   {
     url: '/basic-api/system/getDeptList',
@@ -182,6 +194,7 @@ export default [
     },
   },
  */
+  /*
   {
     url: '/basic-api/system/getMenuList',
     timeout: 100,
@@ -203,4 +216,5 @@ export default [
       }
     },
   },
+ */
 ] as MockMethod[];
