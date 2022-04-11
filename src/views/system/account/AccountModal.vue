@@ -10,6 +10,8 @@
   import { accountFormSchema } from './account.data';
   import { getDeptList } from '/@/api/system';
 
+  import { useUserStore } from '/@/store/modules/user';
+
   export default defineComponent({
     name: 'AccountModal',
     components: { BasicModal, BasicForm },
@@ -46,11 +48,13 @@
             show: !unref(isUpdate),
           },
           {
-            field: 'dept',
+            field: 'deptId',
             componentProps: { treeData },
           },
         ]);
       });
+
+      const userStore = useUserStore();
 
       const getTitle = computed(() => (!unref(isUpdate) ? '新增账号' : '编辑账号'));
 
@@ -59,6 +63,8 @@
           const values = await validate();
           setModalProps({ confirmLoading: true });
           // TODO custom api
+          const res = await userStore.updateUser(values);
+          console.log(res);
           console.log(values);
           closeModal();
           emit('success', { isUpdate: unref(isUpdate), values: { ...values, id: rowId.value } });

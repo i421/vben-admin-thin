@@ -81,6 +81,8 @@
         },
       });
 
+      const userStore = useUserStore();
+
       function handleCreate() {
         openModal(true, {
           isUpdate: false,
@@ -88,14 +90,13 @@
       }
 
       function handleEdit(record: Recordable) {
+        userStore.setCurrentEditAccountId(record.userId);
         console.log(record);
         openModal(true, {
           record,
           isUpdate: true,
         });
       }
-
-      const userStore = useUserStore();
 
       function handleDelete(record: Recordable) {
         userStore.deleteUser(record.userId);

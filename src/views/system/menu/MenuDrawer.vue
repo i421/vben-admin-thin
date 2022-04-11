@@ -15,6 +15,7 @@
   import { BasicForm, useForm } from '/@/components/Form/index';
   import { formSchema } from './menu.data';
   import { BasicDrawer, useDrawerInner } from '/@/components/Drawer';
+  import { useMenuStore } from '/@/store/modules/menu';
 
   import { getMenuList } from '/@/api/system';
 
@@ -49,6 +50,8 @@
         });
       });
 
+      const menuStore = useMenuStore();
+
       const getTitle = computed(() => (!unref(isUpdate) ? '新增菜单' : '编辑菜单'));
 
       async function handleSubmit() {
@@ -56,6 +59,8 @@
           const values = await validate();
           setDrawerProps({ confirmLoading: true });
           // TODO custom api
+          const res = await menuStore.updateMenu(values);
+          console.log(res);
           console.log(values);
           closeDrawer();
           emit('success');

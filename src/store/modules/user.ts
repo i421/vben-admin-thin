@@ -8,7 +8,7 @@ import { ROLES_KEY, TOKEN_KEY, USER_INFO_KEY } from '/@/enums/cacheEnum';
 import { getAuthCache, setAuthCache } from '/@/utils/auth';
 import { GetUserInfoModel, LoginParams } from '/@/api/sys/model/userModel';
 import { doLogout, getUserInfo, loginApi } from '/@/api/sys/user';
-import { deleteAccount } from '/@/api/system/index';
+import { updateAccount, deleteAccount } from '/@/api/system/index';
 import { useI18n } from '/@/hooks/web/useI18n';
 import { useMessage } from '/@/hooks/web/useMessage';
 import { router } from '/@/router';
@@ -39,6 +39,7 @@ export const useUserStore = defineStore({
     sessionTimeout: false,
     // Last fetch time
     lastUpdateTime: 0,
+    currentEditAccountId: -1,
   }),
   getters: {
     getUserInfo(): UserInfo {
@@ -55,6 +56,9 @@ export const useUserStore = defineStore({
     },
     getLastUpdateTime(): number {
       return this.lastUpdateTime;
+    },
+    getCurrentEditAccountId(): number {
+      return this.currentEditAccountId;
     },
   },
   actions: {
@@ -73,6 +77,9 @@ export const useUserStore = defineStore({
     },
     setSessionTimeout(flag: boolean) {
       this.sessionTimeout = flag;
+    },
+    setCurrentEditAccountId(id: number) {
+      this.currentEditAccountId = id;
     },
     resetState() {
       this.userInfo = null;
@@ -171,13 +178,33 @@ export const useUserStore = defineStore({
     },
 
     /*
+     * 更新用户
+     */
+    async updateUser(data) {
+      const { notification } = useMessage();
+      try {
+        await updateAccount(data);
+      } catch {
+        notification.error({
+          message: '更新失败',
+        });
+      }
+    },
+
+    /*
      * 删除用户
      */
     async deleteUser(id) {
+      const { notification } = useMessage();
       try {
         await deleteAccount(id);
+        notification.success({
+          message: '删除成功',
+        });
       } catch {
-        console.log('删除用户失败');
+        notification.error({
+          message: '删除失败',
+        });
       }
     },
   },

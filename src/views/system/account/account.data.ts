@@ -1,6 +1,7 @@
 import { getAllRoleList, isAccountExist } from '/@/api/system';
 import { BasicColumn } from '/@/components/Table';
 import { FormSchema } from '/@/components/Table';
+import { useUserStore } from '/@/store/modules/user';
 
 export const columns: BasicColumn[] = [
   {
@@ -25,7 +26,7 @@ export const columns: BasicColumn[] = [
   },
   {
     title: '角色',
-    dataIndex: 'roles[0].roleName',
+    dataIndex: 'role_names',
     width: 200,
   },
   {
@@ -34,7 +35,7 @@ export const columns: BasicColumn[] = [
   },
   {
     title: '部门',
-    dataIndex: 'deptId',
+    dataIndex: 'dept_name',
     isShow: false,
   },
 ];
@@ -58,7 +59,7 @@ export const accountFormSchema: FormSchema[] = [
   {
     field: 'userId',
     label: '序号',
-    component: 'Input',
+    component: 'InputNumber',
     show: false,
     required: true,
   },
@@ -75,7 +76,8 @@ export const accountFormSchema: FormSchema[] = [
       {
         validator(_, value) {
           return new Promise((resolve, reject) => {
-            isAccountExist(value)
+            const userStore = useUserStore();
+            isAccountExist(value, userStore.getCurrentEditAccountId)
               .then(() => resolve())
               .catch((err) => {
                 reject(err.message || '验证失败');
@@ -94,17 +96,18 @@ export const accountFormSchema: FormSchema[] = [
   },
   {
     label: '角色',
-    field: 'role',
+    field: 'role_ids',
     component: 'ApiSelect',
     componentProps: {
       api: getAllRoleList,
+      mode: 'multiple',
       labelField: 'roleName',
       valueField: 'id',
     },
     required: true,
   },
   {
-    field: 'dept',
+    field: 'deptId',
     label: '所属部门',
     component: 'TreeSelect',
     componentProps: {

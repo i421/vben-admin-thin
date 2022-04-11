@@ -90,7 +90,7 @@ export const formSchema: FormSchema[] = [
     field: 'id',
     label: '序号',
     required: true,
-    component: 'Input',
+    component: 'InputNumber',
     show: false,
   },
   {
@@ -130,7 +130,7 @@ export const formSchema: FormSchema[] = [
   },
   {
     label: ' ',
-    field: 'menu',
+    field: 'menu_ids',
     slot: 'menu',
     component: 'Input',
   },

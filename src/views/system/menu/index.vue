@@ -37,6 +37,8 @@
 
   import { columns, searchFormSchema } from './menu.data';
 
+  import { useMenuStore } from '/@/store/modules/menu';
+
   export default defineComponent({
     name: 'MenuManagement',
     components: { BasicTable, MenuDrawer, TableAction },
@@ -67,6 +69,8 @@
         },
       });
 
+      const menuStore = useMenuStore();
+
       function handleCreate() {
         openDrawer(true, {
           isUpdate: false,
@@ -81,6 +85,8 @@
       }
 
       function handleDelete(record: Recordable) {
+        const res = menuStore.deleteMenu(record.id);
+        console.log(res);
         console.log(record);
       }
 

@@ -30,6 +30,8 @@
 
   import { getMenuList } from '/@/api/system';
 
+  import { useRoleStore } from '/@/store/modules/role';
+
   export default defineComponent({
     name: 'RoleDrawer',
     components: { BasicDrawer, BasicForm, BasicTree },
@@ -60,6 +62,8 @@
         }
       });
 
+      const roleStore = useRoleStore();
+
       const getTitle = computed(() => (!unref(isUpdate) ? '新增角色' : '编辑角色'));
 
       async function handleSubmit() {
@@ -67,6 +71,8 @@
           const values = await validate();
           setDrawerProps({ confirmLoading: true });
           // TODO custom api
+          const res = await roleStore.updateRole(values);
+          console.log(res);
           console.log(values);
           closeDrawer();
           emit('success');

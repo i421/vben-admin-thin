@@ -79,15 +79,22 @@ export const searchFormSchema: FormSchema[] = [
 
 export const formSchema: FormSchema[] = [
   {
+    field: 'id',
+    label: '序号',
+    component: 'InputNumber',
+    show: false,
+    required: true,
+  },
+  {
     field: 'type',
     label: '菜单类型',
     component: 'RadioButtonGroup',
     defaultValue: '0',
     componentProps: {
       options: [
-        { label: '目录', value: '0' },
-        { label: '菜单', value: '1' },
-        { label: '按钮', value: '2' },
+        { label: '目录', value: 0 },
+        { label: '菜单', value: 1 },
+        { label: '按钮', value: 2 },
       ],
     },
     colProps: { lg: 24, md: 24 },
@@ -150,11 +157,11 @@ export const formSchema: FormSchema[] = [
     field: 'status',
     label: '状态',
     component: 'RadioButtonGroup',
-    defaultValue: '0',
+    defaultValue: 0,
     componentProps: {
       options: [
-        { label: '启用', value: '0' },
-        { label: '禁用', value: '1' },
+        { label: '启用', value: 0 },
+        { label: '禁用', value: 1 },
       ],
     },
   },
@@ -162,11 +169,11 @@ export const formSchema: FormSchema[] = [
     field: 'isExt',
     label: '是否外链',
     component: 'RadioButtonGroup',
-    defaultValue: '0',
+    defaultValue: 0,
     componentProps: {
       options: [
-        { label: '否', value: '0' },
-        { label: '是', value: '1' },
+        { label: '否', value: 0 },
+        { label: '是', value: 1 },
       ],
     },
     ifShow: ({ values }) => !isButton(values.type),
@@ -176,11 +183,11 @@ export const formSchema: FormSchema[] = [
     field: 'keepalive',
     label: '是否缓存',
     component: 'RadioButtonGroup',
-    defaultValue: '0',
+    defaultValue: 0,
     componentProps: {
       options: [
-        { label: '否', value: '0' },
-        { label: '是', value: '1' },
+        { label: '否', value: 0 },
+        { label: '是', value: 1 },
       ],
     },
     ifShow: ({ values }) => isMenu(values.type),
@@ -190,11 +197,11 @@ export const formSchema: FormSchema[] = [
     field: 'show',
     label: '是否显示',
     component: 'RadioButtonGroup',
-    defaultValue: '0',
+    defaultValue: 0,
     componentProps: {
       options: [
-        { label: '是', value: '0' },
-        { label: '否', value: '1' },
+        { label: '是', value: 0 },
+        { label: '否', value: 1 },
       ],
     },
     ifShow: ({ values }) => !isButton(values.type),

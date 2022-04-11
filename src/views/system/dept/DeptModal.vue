@@ -4,11 +4,11 @@
   </BasicModal>
 </template>
 <script lang="ts">
-  import { useDeptStore } from '/@/store/modules/dept';
   import { defineComponent, ref, computed, unref } from 'vue';
   import { BasicModal, useModalInner } from '/@/components/Modal';
   import { BasicForm, useForm } from '/@/components/Form/index';
   import { formSchema } from './dept.data';
+  import { useDeptStore } from '/@/store/modules/dept';
 
   import { getDeptList } from '/@/api/system';
   export default defineComponent({

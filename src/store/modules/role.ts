@@ -2,6 +2,7 @@
 import { defineStore } from 'pinia';
 import { store } from '/@/store';
 import { updateRole, deleteRole } from '/@/api/system/index';
+import { useMessage } from '/@/hooks/web/useMessage';
 
 export const useRoleStore = defineStore({
   id: 'app-role',
@@ -16,10 +17,13 @@ export const useRoleStore = defineStore({
      * @description: logout
      */
     async updateRole(data) {
+      const { notification } = useMessage();
       try {
         await updateRole(data);
       } catch {
-        console.log('更新角色失败');
+        notification.error({
+          message: '更新失败',
+        });
       }
     },
 
