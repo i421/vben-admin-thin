@@ -8,7 +8,7 @@ import { ROLES_KEY, TOKEN_KEY, USER_INFO_KEY } from '/@/enums/cacheEnum';
 import { getAuthCache, setAuthCache } from '/@/utils/auth';
 import { GetUserInfoModel, LoginParams } from '/@/api/sys/model/userModel';
 import { doLogout, getUserInfo, loginApi } from '/@/api/sys/user';
-import { updateAccount, deleteAccount } from '/@/api/system/index';
+import { updateAccount, updatePassword, deleteAccount } from '/@/api/system/index';
 import { useI18n } from '/@/hooks/web/useI18n';
 import { useMessage } from '/@/hooks/web/useMessage';
 import { router } from '/@/router';
@@ -188,6 +188,25 @@ export const useUserStore = defineStore({
         notification.error({
           message: '更新失败',
         });
+      }
+    },
+
+    /*
+     * 更新密码
+     */
+    async updatePassword(data) {
+      try {
+        const res = await updatePassword(data);
+        console.log(res);
+        // 返回成功结果给页面
+        //return res
+        // 清除登陆信息
+        this.setToken(undefined);
+        this.setSessionTimeout(false);
+        this.setUserInfo(null);
+        router.push(PageEnum.BASE_LOGIN);
+      } catch {
+        // todo
       }
     },
 

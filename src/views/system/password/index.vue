@@ -14,6 +14,8 @@
   import { PageWrapper } from '/@/components/Page';
   import { BasicForm, useForm } from '/@/components/Form';
 
+  import { useUserStore } from '/@/store/modules/user';
+
   import { formSchema } from './pwd.data';
   export default defineComponent({
     name: 'ChangePassword',
@@ -26,16 +28,27 @@
         schemas: formSchema,
       });
 
+      const userStore = useUserStore();
+
       async function handleSubmit() {
+        console.log('submit');
         try {
           const values = await validate();
           const { passwordOld, passwordNew } = values;
 
-          // TODO custom api
+          const res = await userStore.updatePassword({
+            oldPwd: passwordOld,
+            newPwd: passwordNew,
+            id: userStore.getUserInfo?.userId,
+          });
           console.log(passwordOld, passwordNew);
+          // store返回则有数据
           // const { router } = useRouter();
           // router.push(pageEnum.BASE_LOGIN);
-        } catch (error) {}
+          console.log(res);
+        } catch (error) {
+          console.log(error);
+        }
       }
 
       return { register, resetFields, handleSubmit };

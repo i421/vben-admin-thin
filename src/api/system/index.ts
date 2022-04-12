@@ -15,6 +15,7 @@ import { defHttp } from '/@/utils/http/axios';
 enum Api {
   AccountList = '/system/getAccountList',
   updateAccount = '/system/updateAccount',
+  updatePassword = '/system/updatePassword',
   deleteAccount = '/system/deleteAccount',
   IsAccountExist = '/system/accountExist',
 
@@ -37,6 +38,8 @@ export const getAccountList = (params: AccountParams) =>
   defHttp.get<AccountListGetResultModel>({ url: Api.AccountList, params });
 
 export const updateAccount = (data) => defHttp.post({ url: Api.updateAccount, params: data });
+
+export const updatePassword = (data) => defHttp.post({ url: Api.updatePassword, params: data });
 
 export const deleteAccount = (id) => defHttp.delete({ url: Api.deleteAccount, params: { id: id } });
 
