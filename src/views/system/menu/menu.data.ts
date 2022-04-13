@@ -83,7 +83,7 @@ export const formSchema: FormSchema[] = [
     label: '序号',
     component: 'InputNumber',
     show: false,
-    required: true,
+    required: false,
   },
   {
     field: 'type',

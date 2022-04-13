@@ -14,30 +14,31 @@ import { defHttp } from '/@/utils/http/axios';
 
 enum Api {
   AccountList = '/system/getAccountList',
-  updateAccount = '/system/updateAccount',
+  updateOrCreateAccount = '/system/updateOrCreateAccount',
   updatePassword = '/system/updatePassword',
   deleteAccount = '/system/deleteAccount',
   IsAccountExist = '/system/accountExist',
 
   DeptList = '/system/getDeptList',
-  updateDept = '/system/updateDept',
+  updateOrCreateDept = '/system/updateOrCreateDept',
   deleteDept = '/system/deleteDept',
 
   MenuList = '/system/getMenuList',
-  updateMenu = '/system/updateMenu',
+  updateOrCreateMenu = '/system/updateOrCreateMenu',
   deleteMenu = '/system/deleteMenu',
 
   RolePageList = '/system/getRoleListByPage',
   setRoleStatus = '/system/setRoleStatus',
   GetAllRoleList = '/system/getAllRoleList',
-  updateRole = '/system/updateRole',
+  updateOrCreateRole = '/system/updateOrCreateRole',
   deleteRole = '/system/deleteRole',
 }
 
 export const getAccountList = (params: AccountParams) =>
   defHttp.get<AccountListGetResultModel>({ url: Api.AccountList, params });
 
-export const updateAccount = (data) => defHttp.post({ url: Api.updateAccount, params: data });
+export const updateOrCreateAccount = (data) =>
+  defHttp.post({ url: Api.updateOrCreateAccount, params: data });
 
 export const updatePassword = (data) => defHttp.post({ url: Api.updatePassword, params: data });
 
@@ -52,14 +53,16 @@ export const isAccountExist = (account: string, userId: number) =>
 export const getDeptList = (params?: DeptListItem) =>
   defHttp.get<DeptListGetResultModel>({ url: Api.DeptList, params });
 
-export const updateDept = (data) => defHttp.post({ url: Api.updateDept, params: data });
+export const updateOrCreateDept = (data) =>
+  defHttp.post({ url: Api.updateOrCreateDept, params: data });
 
 export const deleteDept = (id) => defHttp.delete({ url: Api.deleteDept, params: { id: id } });
 
 export const getMenuList = (params?: MenuParams) =>
   defHttp.get<MenuListGetResultModel>({ url: Api.MenuList, params });
 
-export const updateMenu = (data) => defHttp.post({ url: Api.updateMenu, params: data });
+export const updateOrCreateMenu = (data) =>
+  defHttp.post({ url: Api.updateOrCreateMenu, params: data });
 
 export const deleteMenu = (id) => defHttp.delete({ url: Api.deleteMenu, params: { id: id } });
 
@@ -72,6 +75,7 @@ export const getAllRoleList = (params?: RoleParams) =>
 export const setRoleStatus = (id: number, status: string) =>
   defHttp.post({ url: Api.setRoleStatus, params: { id, status } });
 
-export const updateRole = (data) => defHttp.post({ url: Api.updateRole, params: data });
+export const updateOrCreateRole = (data) =>
+  defHttp.post({ url: Api.updateOrCreateRole, params: data });
 
 export const deleteRole = (id) => defHttp.delete({ url: Api.deleteRole, params: { id: id } });

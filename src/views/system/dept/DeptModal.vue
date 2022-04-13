@@ -50,8 +50,7 @@
           const values = await validate();
           setModalProps({ confirmLoading: true });
           // TODO custom api
-          const res = await deptStore.updateDept(values);
-          console.log(res);
+          await deptStore.updateOrCreateDept(values);
           closeModal();
           emit('success');
         } finally {

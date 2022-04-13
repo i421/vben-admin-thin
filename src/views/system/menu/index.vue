@@ -85,8 +85,11 @@
       }
 
       function handleDelete(record: Recordable) {
-        const res = menuStore.deleteMenu(record.id);
-        console.log(res);
+        menuStore.deleteMenu(record.id).then((res) => {
+          if (res == 0) {
+            reload();
+          }
+        });
         console.log(record);
       }
 

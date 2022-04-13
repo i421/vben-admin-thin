@@ -61,20 +61,29 @@ export const accountFormSchema: FormSchema[] = [
     label: '序号',
     component: 'InputNumber',
     show: false,
-    required: true,
+    required: false,
   },
   {
     field: 'account',
     label: '用户名',
     component: 'Input',
-    helpMessage: ['本字段演示异步验证', '不能输入带有admin的用户名'],
+    helpMessage: ['不能输入带有admin的用户名'],
     rules: [
       {
         required: true,
         message: '请输入用户名',
       },
       {
+        min: 3,
+        message: '至少三位',
+      },
+      {
         validator(_, value) {
+          if (value.length < 1) {
+            return new Promise((resolve, reject) => {
+              reject('');
+            });
+          }
           return new Promise((resolve, reject) => {
             const userStore = useUserStore();
             isAccountExist(value, userStore.getCurrentEditAccountId)

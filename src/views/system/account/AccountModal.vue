@@ -63,8 +63,7 @@
           const values = await validate();
           setModalProps({ confirmLoading: true });
           // TODO custom api
-          const res = await userStore.updateUser(values);
-          console.log(res);
+          await userStore.updateOrCreateAccount(values);
           console.log(values);
           closeModal();
           emit('success', { isUpdate: unref(isUpdate), values: { ...values, id: rowId.value } });

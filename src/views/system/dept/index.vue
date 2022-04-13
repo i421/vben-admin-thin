@@ -84,8 +84,11 @@
       }
 
       function handleDelete(record: Recordable) {
-        const res = deptStore.deleteDept(record.id);
-        console.log(res);
+        deptStore.deleteDept(record.id).then((res) => {
+          if (res == 0) {
+            reload();
+          }
+        });
       }
 
       function handleSuccess() {

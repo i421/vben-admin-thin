@@ -1,7 +1,8 @@
 // import type { ErrorMessageMode } from '/#/axios';
 import { defineStore } from 'pinia';
 import { store } from '/@/store';
-import { updateDept, deleteDept } from '/@/api/system/index';
+import { updateOrCreateDept, deleteDept } from '/@/api/system/index';
+import { useMessage } from '/@/hooks/web/useMessage';
 
 export const useDeptStore = defineStore({
   id: 'app-dept',
@@ -13,19 +14,24 @@ export const useDeptStore = defineStore({
   },
   actions: {
     /**
-     * @description: logout
+     * @description: 更新和创建
      */
-    async updateDept(data) {
+    async updateOrCreateDept(data) {
       try {
-        await updateDept(data);
+        await updateOrCreateDept(data);
       } catch {
         console.log('更新部门失败');
       }
     },
 
     async deleteDept(id) {
+      const { notification } = useMessage();
       try {
-        await deleteDept(id);
+        const res = await deleteDept(id);
+        notification.success({
+          message: '删除成功',
+        });
+        return res;
       } catch {
         console.log('删除部门失败');
       }

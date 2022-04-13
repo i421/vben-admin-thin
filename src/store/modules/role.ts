@@ -1,7 +1,7 @@
 // import type { ErrorMessageMode } from '/#/axios';
 import { defineStore } from 'pinia';
 import { store } from '/@/store';
-import { updateRole, deleteRole } from '/@/api/system/index';
+import { updateOrCreateRole, deleteRole } from '/@/api/system/index';
 import { useMessage } from '/@/hooks/web/useMessage';
 
 export const useRoleStore = defineStore({
@@ -16,10 +16,10 @@ export const useRoleStore = defineStore({
     /**
      * @description: logout
      */
-    async updateRole(data) {
+    async updateOrCreateRole(data) {
       const { notification } = useMessage();
       try {
-        await updateRole(data);
+        await updateOrCreateRole(data);
       } catch {
         notification.error({
           message: '更新失败',
@@ -28,8 +28,13 @@ export const useRoleStore = defineStore({
     },
 
     async deleteRole(id) {
+      const { notification } = useMessage();
       try {
-        await deleteRole(id);
+        const res = await deleteRole(id);
+        notification.success({
+          message: '删除成功',
+        });
+        return res;
       } catch (e) {
         console.log('删除角色失败');
       }

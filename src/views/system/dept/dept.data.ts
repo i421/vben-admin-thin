@@ -63,9 +63,9 @@ export const formSchema: FormSchema[] = [
   {
     field: 'id',
     label: '序号',
-    component: 'Input',
+    component: 'InputNumber',
     show: false,
-    required: true,
+    required: false,
   },
   {
     field: 'deptName',

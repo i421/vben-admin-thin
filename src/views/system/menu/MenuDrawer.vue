@@ -59,8 +59,7 @@
           const values = await validate();
           setDrawerProps({ confirmLoading: true });
           // TODO custom api
-          const res = await menuStore.updateMenu(values);
-          console.log(res);
+          await menuStore.updateOrCreateMenu(values);
           console.log(values);
           closeDrawer();
           emit('success');

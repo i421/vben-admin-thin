@@ -8,7 +8,7 @@ import { ROLES_KEY, TOKEN_KEY, USER_INFO_KEY } from '/@/enums/cacheEnum';
 import { getAuthCache, setAuthCache } from '/@/utils/auth';
 import { GetUserInfoModel, LoginParams } from '/@/api/sys/model/userModel';
 import { doLogout, getUserInfo, loginApi } from '/@/api/sys/user';
-import { updateAccount, updatePassword, deleteAccount } from '/@/api/system/index';
+import { updateOrCreateAccount, updatePassword, deleteAccount } from '/@/api/system/index';
 import { useI18n } from '/@/hooks/web/useI18n';
 import { useMessage } from '/@/hooks/web/useMessage';
 import { router } from '/@/router';
@@ -180,10 +180,10 @@ export const useUserStore = defineStore({
     /*
      * 更新用户
      */
-    async updateUser(data) {
+    async updateOrCreateAccount(data) {
       const { notification } = useMessage();
       try {
-        await updateAccount(data);
+        await updateOrCreateAccount(data);
       } catch {
         notification.error({
           message: '更新失败',
@@ -216,10 +216,11 @@ export const useUserStore = defineStore({
     async deleteUser(id) {
       const { notification } = useMessage();
       try {
-        await deleteAccount(id);
+        const res = await deleteAccount(id);
         notification.success({
           message: '删除成功',
         });
+        return res;
       } catch {
         notification.error({
           message: '删除失败',

@@ -1,7 +1,8 @@
 // import type { ErrorMessageMode } from '/#/axios';
 import { defineStore } from 'pinia';
 import { store } from '/@/store';
-import { updateMenu, deleteMenu } from '/@/api/system/index';
+import { updateOrCreateMenu, deleteMenu } from '/@/api/system/index';
+import { useMessage } from '/@/hooks/web/useMessage';
 
 export const useMenuStore = defineStore({
   id: 'app-menu',
@@ -15,17 +16,22 @@ export const useMenuStore = defineStore({
     /**
      * @description: logout
      */
-    async updateMenu(data) {
+    async updateOrCreateMenu(data) {
       try {
-        await updateMenu(data);
+        await updateOrCreateMenu(data);
       } catch {
         console.log('更新菜单失败');
       }
     },
 
     async deleteMenu(id) {
+      const { notification } = useMessage();
       try {
-        await deleteMenu(id);
+        const res = await deleteMenu(id);
+        notification.success({
+          message: '删除成功',
+        });
+        return res;
       } catch {
         console.log('删除菜单失败');
       }

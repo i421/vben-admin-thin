@@ -81,8 +81,11 @@
       }
 
       function handleDelete(record: Recordable) {
-        roleStore.deleteRole(record.id);
-        console.log(record);
+        roleStore.deleteRole(record.id).then((res) => {
+          if (res == 0) {
+            reload();
+          }
+        });
       }
 
       function handleSuccess() {
