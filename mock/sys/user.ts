@@ -1,8 +1,9 @@
-import { MockMethod } from 'vite-plugin-mock';
-import { resultError, resultSuccess, getRequestToken, requestParams } from '../_util';
+// import { MockMethod } from 'vite-plugin-mock';
+// import { resultError, resultSuccess, getRequestToken, requestParams } from '../_util';
 
 export function createFakeUserList() {
   return [
+    /*
     {
       userId: '1',
       username: 'vben',
@@ -35,17 +36,20 @@ export function createFakeUserList() {
         },
       ],
     },
+   */
   ];
 }
 
+/*
 const fakeCodeList: any = {
   '1': ['1000', '3000', '5000'],
 
   '2': ['2000', '4000', '6000'],
 };
+*/
+/*
 export default [
   // mock user login
-  /*
   {
     url: '/basic-api/login',
     timeout: 200,
@@ -83,6 +87,7 @@ export default [
     },
   },
  */
+/*
   {
     url: '/basic-api/getPermCode',
     timeout: 200,
@@ -95,11 +100,13 @@ export default [
         return resultError('Invalid token!');
       }
       const codeList = fakeCodeList[checkUser.userId];
+      const codeList = fakeCodeList['1'];
 
       return resultSuccess(codeList);
     },
   },
-  /*
+  */
+/*
   {
     url: '/basic-api/logout',
     timeout: 200,
@@ -114,5 +121,5 @@ export default [
       return resultSuccess(undefined, { message: 'Token has been destroyed' });
     },
   },
- */
 ] as MockMethod[];
+ */
