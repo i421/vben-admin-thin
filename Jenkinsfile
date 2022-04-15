@@ -5,9 +5,6 @@ pipeline{
         project_workspace='/var/www/test/vben'
     }
 
-    parameters{
-    }
-
     stages{
         stage("node package"){
              steps{
