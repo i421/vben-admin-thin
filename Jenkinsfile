@@ -8,6 +8,8 @@ pipeline{
     stages{
         stage("node package"){
              steps{
+                sh 'export NODE_HOME=/usr/local/node'
+                sh 'export PATH=$PATH:$NODE_HOME/bin'
                 sh '/usr/local/node/bin/yarn install'
                 sh '/usr/local/node/bin/npm run build'
             }
