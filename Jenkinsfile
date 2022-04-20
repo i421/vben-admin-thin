@@ -2,10 +2,7 @@ pipeline{
     agent any
 
     environment{
-        project_workspace='/var/www/test/vben'
-    }
-
-    parameters{
+        project_workspace='/var/www/html/vben'
     }
 
     stages{
@@ -16,11 +13,9 @@ pipeline{
             }
         }
 
-        stage("zip file"){
+        stage("copy file"){
              steps{
-                sh 'sudo zip -r dist.zip dist'
-                sh 'sudo mv dist.zip ${project_workspace}'
-                sh 'sudo unzip -o ${project_workspace}/dist.zip -d ${project_workspace}'
+                sh 'sudo mv dist ${project_workspace}'
             }
         }
     }
